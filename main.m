@@ -9,7 +9,7 @@ C=[1 0 0 0;0 1 0 0];
 [A_dis,X2] = dynamics(A,B,C,dt,x_ref2,time);
 [A_dis,X3] = dynamics(A,B,C,dt,x_ref3,time);
 [A_dis,X4]= dynamics(A,B,C,dt,x_ref4,time); %A_dis are assumed to be the same for all quadrators
-
+555555
 figure(1)
 plot(X1(1,:),X1(2,:));
 grid on
