@@ -1,7 +1,9 @@
-
-function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = kalman_1(Z,R,Q,H,x0,P0,time,A_dis)
+%kalman filter for stationary sensors
+function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = kalman_1(R,Q,H,x0,P0,time,A_dis,X_tar,X_sen,lamda)
          K=zeros(4,2,time+1);P_M(:,:,1)=P0;
-         K(:,:,1)=P_M(:,:,1)*H'*inv(R);
+         d0=norm(X_tar([1 2],1)-X_sen([1 2]));
+         R0=(lamda*d0)^2*R;
+         K(:,:,1)=P_M(:,:,1)*H'*inv(R0);
          X_hat(:,1)=x0;X_bar(:,1)=[0;0;0;0];P_P(:,:,1)=zeros(4,4);
          X_plus(:,1)=X_hat(:,1)+sqrt(diag(P0));
          X_min(:,1)= X_hat(:,1)-sqrt(diag(P0));
@@ -10,8 +12,11 @@ function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = kalman_1(Z,R,Q,H,x0,P0,time,A_dis)
     X_bar(:,i+1)=A_dis*X_hat(:,i);
     P_P(:,:,i+1)=A_dis*P_M(:,:,i)*A_dis'+Q;
     % post update
-    P_M(:,:,i+1)=inv(inv(P_P(:,:,i+1))+H'*inv(R)*H);
-    K(:,:,i+1)=P_M(:,:,i+1)*H'*inv(R);
+    d=norm(X_tar([1 2],i+1)-X_sen([1 2])); % distance between target and sensor
+    R_real=(lamda*d)^2*R; %real time covirance matrix of w
+    Z(:,i+1)=X_tar([1 2],i+1)+[normrnd(0,R_real(1,1));normrnd(0,R_real(2,2))]; % measurement is modeled as X_tar+w
+    P_M(:,:,i+1)=inv(inv(P_P(:,:,i+1))+H'*inv(R_real)*H);
+    K(:,:,i+1)=P_M(:,:,i+1)*H'*inv(R_real);
     X_hat(:,i+1)=X_bar(:,i+1)+K(:,:,i+1)*(Z(:,i+1)-H*X_bar(:,i+1));
     X_plus(:,i+1)=X_hat(:,i+1)+sqrt(diag(P_M(:,:,i+1)));
     X_min(:,i+1)= X_hat(:,i+1)-sqrt(diag(P_M(:,:,i+1)));

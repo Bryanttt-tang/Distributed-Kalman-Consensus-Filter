@@ -8,7 +8,6 @@
 function Lg = con_fil(d_vec, m, n)
 f_tilde = sum(cosh(d_vec));
 F = diag(cosh(d_vec));
-
 C = F\(ones(n)*F - f_tilde*eye(n));
 Lg = -kron(C, eye(m));
 end
