@@ -6,7 +6,7 @@ sysc=ss(A,B,C,[]);
 sysd = c2d(sysc,dt);
 A_dis=sysd.A;
 B_dis=sysd.B;
-x0=x_ref+10*[normrnd(0,0.1);normrnd(0,0.1);normrnd(0,0.1);normrnd(0,0.1)];% initial condition
+x0=x_ref+[normrnd(0,1);0;normrnd(0,1);0];% initial condition
 X_real(:,1)=x0;
 for i=1:time
     % if x_desired = x_ref, we let u=K*(x-x_ref)

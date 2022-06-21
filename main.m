@@ -1,11 +1,11 @@
-Cx=1; Cy=0.5; dt=0.1; T=100; time=T/dt; m=1.2; n=4; % m is mass, n is the number of UAVs
+Cx=1; Cy=1; dt=0.1; T=100; time=T/dt; m=1.2; n=4; % m is mass, n is the number of UAVs
 t_vec=0:dt:T;
 x_ref1=[-1;1;0;0]; x_ref2=[-1;-1;0;0]; x_ref3=[1;1;0;0];x_ref4=[1;-1;0;0]; %referenece position and velocity in cartisian coordinate[x;y]
 %X1=zeros(4,time+1);X2=zeros(4,time+1);X3=zeros(4,time+1);
 A=[0 0 1 0;0 0 0 1; 0 0 -Cx 0; 0 0 0 -Cy]; B=[0 0;0 0;1/m 0;0 1/m];
 C=[1 0 0 0;0 1 0 0];
-K=[-3 0 0 0; 0 -2 0 0]; %controller gain u=Kx
-Q=0.1*eye(4); % process noise covirance
+K=[-8 0 -2 0; 0 -8 0 -2]; %controller gain u=Kx
+Q=kron([0.01, 0; 0, 0.001], eye(2)); % process noise covirance
 R=[0.2, 0; 0, 0.1]; %measurement noise covirance, w is 2*1 dimension
 rng('default'); s = rng;  rng(s); % fix random seed
 
