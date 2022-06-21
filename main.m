@@ -22,6 +22,12 @@ grid on
 title('Real Dynamics')
 % legend('X1','X2','X3','X4')
 % hold off
+%%
+%   d0=norm(X1([1 2],1)-x_ref2([1 2]));
+%          Rtr=(d0*R)^2;
+%          %dydx=(X_tar(2,1)-X_sen(2))/(X_tar(1,1)-X_sen(1)); %dy/dx
+%          theta=atan2(X1(2,1)-x_ref2(2),X1(1,1)-x_ref2(1));
+%          Rxy = Rrt2Rxy(Rtr, theta);
 
 %% Kalman filtering with GPS measurement
 H=[1 0 0 0; 0 1 0 0]; % Zi=H*xi+w, we measure the x,y position
@@ -32,16 +38,16 @@ H=[1 0 0 0; 0 1 0 0]; % Zi=H*xi+w, we measure the x,y position
 % P_M1(:,:,1)=0.01*eye(2);P_M2(:,:,1)=0.01*eye(2);P_M3(:,:,1)=0.01*eye(2);%initial covirance
 % X1_hat(:,1)=X1(:,1); X2_hat(:,1)=X2(:,1);X3_hat(:,1)=X3(:,1);%initial x0
 Q=0.01*eye(4); % process noise covirance
-R=0.5*eye(2); %measurement noise covirance, w is 2*1 dimension
-lamda=0.02; % covariance=(lamda*d)^2*R;
+R=[0.02, 0; 0, 0.01]; %measurement noise covirance, w is 2*1 dimension
+%lamda=0.02; % covariance=(lamda*d)^2*R;
 
 % estimation of X1
 x01=x_ref1+10*[normrnd(0,0.01);normrnd(0,0.01);normrnd(0,0.01);normrnd(0,0.01)];P01=0.01*eye(4);
 rng(s);
-[X_hat21,P_M21,X_bar21,P_P21,X_plus21,X_min21] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,x_ref2,lamda);
+[X_hat21,P_M21,X_bar21,P_P21,X_plus21,X_min21] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,x_ref2);
 rng(1);
-[X_hat31,P_M31,X_bar31,P_P31,X_plus31,X_min31] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,x_ref3,lamda);
+[X_hat31,P_M31,X_bar31,P_P31,X_plus31,X_min31] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,x_ref3);
 rng(2);
-[X_hat41,P_M41,X_bar41,P_P41,X_plus41,X_min41] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,x_ref4,lamda);
+[X_hat41,P_M41,X_bar41,P_P41,X_plus41,X_min41] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,x_ref4);
 plot_k1(t_vec,X1,X_hat21,X_plus21,X_min21);
 %plot_diff_sensor(t_vec,X1,X_hat21,X_hat31,X_hat41);
