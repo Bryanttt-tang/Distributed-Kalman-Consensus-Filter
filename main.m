@@ -4,10 +4,20 @@ x_ref1=[-1;1;0;0]; x_ref2=[-1;-1;0;0]; x_ref3=[1;1;0;0];x_ref4=[1;-1;0;0]; %refe
 %X1=zeros(4,time+1);X2=zeros(4,time+1);X3=zeros(4,time+1);
 A=[0 0 1 0;0 0 0 1; 0 0 -Cx 0; 0 0 0 -Cy]; B=[0 0;0 0;1/m 0;0 1/m];
 C=[1 0 0 0;0 1 0 0];
-K=[0 0 -3 0; 0 0 0 -2]; %controller gain u=Kx
+K=[-3 0 0 0; 0 -2 0 0]; %controller gain u=Kx
 Q=0.1*eye(4); % process noise covirance
 R=[0.2, 0; 0, 0.1]; %measurement noise covirance, w is 2*1 dimension
 rng('default'); s = rng;  rng(s); % fix random seed
+
+% compute discrete system for sanity check
+sysc=ss(A,B,C,[]);
+sysd = c2d(sysc,dt);
+Ad = sysd.A;
+Bd = sysd.B;
+A_til = Ad+Bd*K;
+
+% real work
+
 [A_dis,X1] = dynamics(A,B,C,dt,x_ref1,time,Q,K);
 [A_dis,X2] = dynamics(A,B,C,dt,x_ref2,time,Q,K);
 [A_dis,X3] = dynamics(A,B,C,dt,x_ref3,time,Q,K);
@@ -52,3 +62,4 @@ rng(2);
 [X_hat41,P_M41,X_bar41,P_P41,X_plus41,X_min41] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,x_ref4);
 plot_k1(t_vec,X1,X_hat21,X_plus21,X_min21);
 %plot_diff_sensor(t_vec,X1,X_hat21,X_hat31,X_hat41);
+
