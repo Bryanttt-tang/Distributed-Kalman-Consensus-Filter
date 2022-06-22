@@ -4,8 +4,8 @@ x_ref1=[-1;1;0;0]; x_ref2=[-1;-1;0;0]; x_ref3=[1;1;0;0];x_ref4=[1;-1;0;0]; %refe
 %X1=zeros(4,time+1);X2=zeros(4,time+1);X3=zeros(4,time+1);
 A=[0 0 1 0;0 0 0 1; 0 0 -Cx 0; 0 0 0 -Cy]; B=[0 0;0 0;1/m 0;0 1/m];
 C=[1 0 0 0;0 1 0 0];
-K=[-8 0 -2 0; 0 -8 0 -2]; %controller gain u=Kx
-Q=kron([0.01, 0; 0, 0.001], eye(2)); % process noise covirance
+K=[-1 0 -0.5 0; 0 -1 0 -0.5]; %controller gain u=Kx
+vu=0.1;   % input noise 
 R=[0.2, 0; 0, 0.1]; %measurement noise covirance, w is 2*1 dimension
 rng('default'); s = rng;  rng(s); % fix random seed
 
@@ -15,13 +15,13 @@ sysd = c2d(sysc,dt);
 Ad = sysd.A;
 Bd = sysd.B;
 A_til = Ad+Bd*K;
-
+Q = Bd*vu*Bd';            % process noise due to input noise
 % real work
 
-[A_dis,X1] = dynamics(A,B,C,dt,x_ref1,time,Q,K);
-[A_dis,X2] = dynamics(A,B,C,dt,x_ref2,time,Q,K);
-[A_dis,X3] = dynamics(A,B,C,dt,x_ref3,time,Q,K);
-[A_dis,X4]= dynamics(A,B,C,dt,x_ref4,time,Q,K); %A_dis are assumed to be the same for all quadrators
+[A_dis,X1] = dynamics(A,B,C,dt,x_ref1,time,vu,K);
+[A_dis,X2] = dynamics(A,B,C,dt,x_ref2,time,vu,K);
+[A_dis,X3] = dynamics(A,B,C,dt,x_ref3,time,vu,K);
+[A_dis,X4]= dynamics(A,B,C,dt,x_ref4,time,vu,K); %A_dis are assumed to be the same for all quadrators
 
 figure(1)
 plot(X1(1,:),X1(2,:));
@@ -53,7 +53,7 @@ H=[1 0 0 0; 0 1 0 0]; % Zi=H*xi+w, we measure the x,y position
 %lamda=0.02; % covariance=(lamda*d)^2*R;
 
 % estimation of X1
-x01=x_ref1+10*[normrnd(0,0.01);normrnd(0,0.01);normrnd(0,0.01);normrnd(0,0.01)];P01=0.01*eye(4);
+x01=x_ref1+10*[normrnd(0,0.01);normrnd(0,0.01);normrnd(0,0.01);normrnd(0,0.01)];P01=1*eye(4);
 rng(s);
 [X_hat21,P_M21,X_bar21,P_P21,X_plus21,X_min21] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,x_ref2);
 rng(1);
