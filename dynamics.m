@@ -1,12 +1,12 @@
 %dynamics: x_dot=A*x+B*u+v
 %we use u=kx as controller
 %v is 4*1 process noise
-function [A_dis,X_real] = dynamics(A,B,C,dt,x_ref,time,vu,K)
+function [A_dis,B_dis,X_real] = dynamics(A,B,C,dt,x_ref,time,vu,K)
 sysc=ss(A,B,C,[]);
 sysd = c2d(sysc,dt);
 A_dis=sysd.A;
 B_dis=sysd.B;
-x0=x_ref+2*[normrnd(0,1);0;normrnd(0,1);0];% initial condition
+x0=x_ref+2*[normrnd(0,0.1);normrnd(0,0.1);1;1];% initial condition
 X_real(:,1)=x0;
 u_pre = [0;0];
 c0 = 1;               % low-pass filter: u_real(k) = c0*u(k) + (1-c0)*u(k-1)

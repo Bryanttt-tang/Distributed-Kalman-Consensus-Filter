@@ -18,23 +18,23 @@ A_til = Ad+Bd*K;
 Q = Bd*vu*Bd';            % process noise due to input noise
 % real work
 
-[A_dis,X1] = dynamics(A,B,C,dt,x_ref1,time,vu,K);
-[A_dis,X2] = dynamics(A,B,C,dt,x_ref2,time,vu,K);
-[A_dis,X3] = dynamics(A,B,C,dt,x_ref3,time,vu,K);
-[A_dis,X4]= dynamics(A,B,C,dt,x_ref4,time,vu,K); %A_dis are assumed to be the same for all quadrators
+[A_dis,B_dis,X1] = dynamics(A,B,C,dt,x_ref1,time,vu,K);
+[A_dis,B_dis,X2] = dynamics(A,B,C,dt,x_ref2,time,vu,K);
+[A_dis,B_dis,X3] = dynamics(A,B,C,dt,x_ref3,time,vu,K);
+[A_dis,B_dis,X4]= dynamics(A,B,C,dt,x_ref4,time,vu,K); %A_dis are assumed to be the same for all quadrators
 
 figure(1)
 plot(X1(1,:),X1(2,:));
 grid on
-% hold on
-% plot(X2(1,:),X2(2,:),'--');
-% hold on
-% plot(X3(1,:),X3(2,:),':');
-% hold on
-% plot(X4(1,:),X3(2,:),'-.');
+hold on
+plot(X2(1,:),X2(2,:),'--');
+hold on
+plot(X3(1,:),X3(2,:),':');
+hold on
+plot(X4(1,:),X4(2,:),'-.');
 title('Real Dynamics')
-% legend('X1','X2','X3','X4')
-% hold off
+legend('X1','X2','X3','X4')
+hold off
 %%
 %   d0=norm(X1([1 2],1)-x_ref2([1 2]));
 %          Rtr=(d0*R)^2;
@@ -55,11 +55,11 @@ H=[1 0 0 0; 0 1 0 0]; % Zi=H*xi+w, we measure the x,y position
 % estimation of X1
 x01=x_ref1+10*[normrnd(0,0.01);normrnd(0,0.01);normrnd(0,0.01);normrnd(0,0.01)];P01=1*eye(4);
 rng(s);
-[X_hat21,P_M21,X_bar21,P_P21,X_plus21,X_min21] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,x_ref2);
+[X_hat21,P_M21,X_bar21,P_P21,X_plus21,X_min21] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,X2);
 rng(1);
-[X_hat31,P_M31,X_bar31,P_P31,X_plus31,X_min31] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,x_ref3);
+[X_hat31,P_M31,X_bar31,P_P31,X_plus31,X_min31] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,X3);
 rng(2);
-[X_hat41,P_M41,X_bar41,P_P41,X_plus41,X_min41] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,x_ref4);
+[X_hat41,P_M41,X_bar41,P_P41,X_plus41,X_min41] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,X4);
 plot_k1(t_vec,X1,X_hat21,X_plus21,X_min21);
 %plot_diff_sensor(t_vec,X1,X_hat21,X_hat31,X_hat41);
 
