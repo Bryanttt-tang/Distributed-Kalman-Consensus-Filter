@@ -1,5 +1,5 @@
 % Consensus Filter
-% Param:  d_vec,  n-vector of measured distances
+% Param:  d_vec,  n-col-vector of measured distances
 %         m,      dimension of state space
 %         n,      number of sensors (n+1 robots)
 % Output: Lg,     Complete consensus gain matrix in Laplacian form, mn x mn
