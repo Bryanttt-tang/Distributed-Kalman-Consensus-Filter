@@ -3,7 +3,7 @@
 % we output X_hat as a tensor, which contains estimate from all the sensors
 %X_tar is still 1d, X_sen is n_sen dimensional
 function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = DKCF(R,Q,H,x0,P0,time,A_dis,B_dis,X_tar,X_sen,n_sen)
-         Ki=zeros(4,2,time+1);P_M(:,:,1)=P0;  gamma=0.1
+         Ki=zeros(4,2,time+1);P_M(:,:,1)=P0;  gamma=0.1;
         % compute R(k) with respect to distance
          d0=[norm(X_tar([1 2],1)-X_sen([1 2],1,1));norm(X_tar([1 2],1)-X_sen([1 2],1,2));norm(X_tar([1 2],1)-X_sen([1 2],1,3))];
 %          Rtr=(d0*R)^2;
