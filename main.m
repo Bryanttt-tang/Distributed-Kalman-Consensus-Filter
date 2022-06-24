@@ -69,3 +69,6 @@ X_sen_1= cat(3,X2,X3,X4);
 %plot_kal_con(t_vec,X1,X_hat_1,X_plus_1,X_min_1,n_sen);
 k=0;% k=1 means plot kalman; while k=0 means plot kalman consensus
 plot_diff_sensor(t_vec,X1,X_hat21,X_hat31,X_hat41,X_hat_1,k);
+%% estimation of X1 using DKCF
+Bd_til=cat(1,Bd,Bd,Bd);
+Q_til = Bd_til*[vu 0;0 vu]*Bd_til';
