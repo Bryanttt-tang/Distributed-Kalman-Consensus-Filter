@@ -5,7 +5,7 @@ x_ref1=[-1;1;0;0]; x_ref2=[-1;-1;0;0]; x_ref3=[1;1;0;0];x_ref4=[1;-1;0;0]; %refe
 A=[0 0 1 0;0 0 0 1; 0 0 -Cx 0; 0 0 0 -Cy]; B=[0 0;0 0;1/m 0;0 1/m];
 C=[1 0 0 0;0 1 0 0];
 L=[-2 0 -0.5 0; 0 -2 0 -0.5]; %controller gain u=Lx
-vu=0.;   % actuation noise 
+vu=0.05  ;   % actuation noise 
 R=[0.2, 0; 0, 0.1]; %measurement noise covirance, w is 2*1 dimension
 rng('default'); s = rng;  rng(s); % fix random seed
 

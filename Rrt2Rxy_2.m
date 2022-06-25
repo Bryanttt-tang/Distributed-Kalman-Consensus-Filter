@@ -11,5 +11,5 @@ function Rxy = Rrt2Rxy_2(Rrt, theta)
 
 R = [cos(theta), -sin(theta); sin(theta), cos(theta)];
 Rxy = R*Rrt*R';
-
+%Rxy = Rrt;
 end
