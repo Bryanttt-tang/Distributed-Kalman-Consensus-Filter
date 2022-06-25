@@ -55,6 +55,11 @@ ylabel('Velocity-y')
 legend('X-hat21','X-hat31','X-hat41')
 sgtitle('estimation error of different sensors-kalman filter')
 
+
+
+
+
+
 else % plot comparison of kalman consensus filter
  subplot(2,2,1)
 %  plot(t_vec,X_real(1,:),'o');
