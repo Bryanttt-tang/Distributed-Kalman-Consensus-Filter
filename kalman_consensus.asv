@@ -20,7 +20,7 @@ function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = kalman_consensus(R,Q,H,x0,P0,time,
      X_min(:,1,n)= X_hat(:,1,n)-sqrt(diag(P0));
  end        
  % update loop
-  for i=1:time
+ for i=1:time
      for n=1:n_sen % assume the target cannot sense its own state
        % prior update
        X_bar(:,i+1,n)=A_dis*X_hat(:,i,n);
