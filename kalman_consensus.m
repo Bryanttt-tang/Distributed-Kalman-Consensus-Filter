@@ -1,7 +1,7 @@
-%kalman consensus filter (sub-optimal)
+% kalman consensus filter (sub-optimal)
 % the number of UAV is n_sen+1
 % we output X_hat as a tensor, which contains estimate from all the sensors
-%X_tar is still 1d, X_sen is n_sen dimensional
+% X_tar is still 1d, X_sen is n_sen dimensional
 function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = kalman_consensus(R,Q,H,x0,P0,time,A_dis,X_tar,X_sen,n_sen)
          Ki=zeros(4,2,time+1,n_sen); eps=0.5;
         
