@@ -1,5 +1,5 @@
 %compare the result of different sensors on the same target
-function plot_diff_sensor(t_vec,X_real,X_hat21,X_hat31,X_hat41,X_hat,k)
+function plot_diff_sensor(t_vec,X_real,X_hat21,X_hat31,X_hat41,X_hat,k,eps,gamma)
 figure(4)
 if k==1 % plot comparison of kalman filter
 subplot(2,2,1)
@@ -56,11 +56,7 @@ legend('X-hat21','X-hat31','X-hat41')
 sgtitle('estimation error of different sensors-kalman filter')
 
 
-
-
-
-
-else % plot comparison of kalman consensus filter
+elseif k==0 % plot comparison of kalman consensus filter
  subplot(2,2,1)
 %  plot(t_vec,X_real(1,:),'o');
 %  hold on
@@ -112,7 +108,65 @@ grid on
 xlabel('Time(s)') 
 ylabel('Velocity-y')
 legend('X-hat21','X-hat31','X-hat41')
-sgtitle('estimation of different sensors using KCF')
+str_1 = sprintf('estimation of different sensors using KCF, eps = %d', eps);
+sgtitle(str_1)
+
+
+else % plot comparison of DKCF
+subplot(2,2,1)
+%  plot(t_vec,X_real(1,:),'o');
+%  hold on
+plot(t_vec,X_hat(1,:),':','color','b');
+hold on
+plot(t_vec,X_hat(5,:),'--','color','g');
+hold on
+plot(t_vec,X_hat(9,:),'-.','color','r');
+grid on
+xlabel('Time(s)') 
+ylabel('Position-x')
+legend('X-hat21','X-hat31','X-hat41')
+
+subplot(2,2,2)
+% plot(t_vec,X_real(2,:),'o');
+% hold on
+plot(t_vec,X_hat(2,:),':','color','b');
+hold on
+plot(t_vec,X_hat(6,:),'--','color','g');
+hold on
+plot(t_vec,X_hat(10,:),'.-','color','r');
+grid on
+xlabel('Time(s)') 
+ylabel('Position-y')
+legend('X-hat21','X-hat31','X-hat41')
+
+subplot(2,2,3)
+% plot(t_vec,X_real(3,:),'o');
+% hold on
+plot(t_vec,X_hat(3,:),':','color','b');
+hold on
+plot(t_vec,X_hat(7,:),'--','color','g');
+hold on
+plot(t_vec,X_hat(11,:),'.-','color','r');
+grid on
+xlabel('Time(s)') 
+ylabel('Velocity-x')
+legend('X-hat21','X-hat31','X-hat41')
+
+subplot(2,2,4)
+% plot(t_vec,X_real(4,:),'o');
+% hold on
+plot(t_vec,X_hat(4,:),':','color','b');
+hold on
+plot(t_vec,X_hat(8,:),'--','color','g');
+hold on
+plot(t_vec,X_hat(12,:),'.-','color','r');
+grid on
+xlabel('Time(s)') 
+ylabel('Velocity-y')
+legend('X-hat21','X-hat31','X-hat41')
+
+str_2 = sprintf('comparison of different sensors using DKCF, gamma = %d', gamma);
+sgtitle(str_2)
 
 end
 end
