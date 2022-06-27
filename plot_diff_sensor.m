@@ -13,6 +13,7 @@ plot(t_vec,X_hat41(1,:),'.-','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Position-x')
+ylim([-2 2]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,2)
@@ -26,6 +27,7 @@ plot(t_vec,X_hat41(2,:),'.-','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Position-y')
+ylim([-2 2]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,3)
@@ -39,6 +41,7 @@ plot(t_vec,X_hat41(3,:),'.-','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Velocity-x')
+ylim([-2 2]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,4)
@@ -52,6 +55,7 @@ plot(t_vec,X_hat41(4,:),'.-','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Velocity-y')
+ylim([-2 2]);
 legend('X-hat21','X-hat31','X-hat41')
 sgtitle('estimation error of different sensors-kalman filter')
 
@@ -68,6 +72,7 @@ plot(t_vec,X_hat(1,:,3),'-.','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Position-x')
+ylim([-1.4 -0.5]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,2)
@@ -81,6 +86,7 @@ plot(t_vec,X_hat(2,:,3),'.-','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Position-y')
+ylim([0.7 1.7]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,3)
@@ -94,6 +100,7 @@ plot(t_vec,X_hat(3,:,3),'.-','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Velocity-x')
+ylim([-0.45 0.45]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,4)
@@ -107,6 +114,7 @@ plot(t_vec,X_hat(4,:,3),'.-','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Velocity-y')
+ylim([-0.45 0.45]);
 legend('X-hat21','X-hat31','X-hat41')
 str_1 = sprintf('estimation of different sensors using KCF, eps = %d', eps);
 sgtitle(str_1)
@@ -124,6 +132,7 @@ plot(t_vec,X_hat(9,:),'-.','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Position-x')
+ylim([-1.4 -0.5]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,2)
@@ -137,6 +146,7 @@ plot(t_vec,X_hat(10,:),'.-','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Position-y')
+ylim([0.7 1.7]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,3)
@@ -150,6 +160,7 @@ plot(t_vec,X_hat(11,:),'.-','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Velocity-x')
+ylim([-0.45 0.45]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,4)
@@ -163,6 +174,7 @@ plot(t_vec,X_hat(12,:),'.-','color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Velocity-y')
+ylim([-0.45 0.45]);
 legend('X-hat21','X-hat31','X-hat41')
 
 str_2 = sprintf('comparison of different sensors using DKCF, gamma = %d', gamma);

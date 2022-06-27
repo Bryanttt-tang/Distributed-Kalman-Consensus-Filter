@@ -77,4 +77,16 @@ gamma=0.25;
 k=2;% k=1 means plot kalman; while k=0 means plot kalman consensus; whereas k=2 means DKCF
 %plot_diff_sensor(t_vec,X1,X_hat21,X_hat31,X_hat41,X_hat_sta,k,3,gamma);
 %plot_DKCF(t_vec,X1,X_hat_sta,X_plus_sta,X_min_sta,n_sen);
-plot_variance(t_vec,P_M21,P_M31,P_M41,P_M_1,P_M_sta,k,eps,gamma)
+M_1=zeros(1,301);M_2=zeros(1,301);M_3=zeros(1,301);
+for n =1:301
+  M_1(n)=P_M_sta(1,1,n);
+  M_2(n)=P_M_sta(5,5,n);
+  M_3(n)=P_M_sta(9,9,n);
+end 
+plot(t_vec,M_1)
+grid on
+hold on
+plot(t_vec,M_2)
+hold on 
+plot(t_vec,M_3)
+hold off

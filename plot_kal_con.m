@@ -2,7 +2,6 @@ function plot_kal_con(t_vec,X_real,X_hat,X_plus,X_min,n_sen)
 % average the estimate of all sensors
 X_ave=sum(X_hat,3)/n_sen; X_plus_ave=sum(X_plus,3)/n_sen; X_min_ave=sum(X_min,3)/n_sen;
 
-figure(3)
 subplot(2,2,1)
 plot(t_vec,X_real(1,:));
 hold on
