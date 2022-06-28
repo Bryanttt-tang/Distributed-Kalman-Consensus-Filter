@@ -1,7 +1,10 @@
-function plot_kal_con(t_vec,X_real,X_hat,X_plus,X_min,n_sen)
+function plot_DKCF(t_vec,X_real,X_hat,X_plus,X_min,n_sen)
 % average the estimate of all sensors
-X_ave=sum(X_hat,3)/n_sen; X_plus_ave=sum(X_plus,3)/n_sen; X_min_ave=sum(X_min,3)/n_sen;
+X_ave=(X_hat([1:4],:)+X_hat([5:8],:)+X_hat([9:12],:))/n_sen; 
+X_plus_ave=(X_plus([1:4],:)+X_plus([5:8],:)+X_plus([9:12],:))/n_sen;
+X_min_ave=(X_min([1:4],:)+X_min([5:8],:)+X_min([9:12],:))/n_sen;
 
+figure(3)
 subplot(2,2,1)
 plot(t_vec,X_real(1,:));
 hold on
@@ -51,5 +54,5 @@ xlabel('Time(s)')
 ylabel('Velocity-y')
 legend('X-real','X-hat','X-hat +/-1 STD')
 
-sgtitle('estimation error using suboptimal KCF')
+sgtitle('estimation error using DKCF')
 end

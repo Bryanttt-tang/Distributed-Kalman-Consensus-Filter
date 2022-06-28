@@ -4,7 +4,7 @@
 %X_tar is still 1d, X_sen is n_sen dimensional
 
 function [X_hat,P_M_sta,X_bar,P_P_sta,X_plus,X_min] = DKCF(R,Q_til,H,x0,P0,time,A_dis,X_tar,X_sen,n_sen,gamma)
-         Ki=zeros(4,2,time+1,n_sen);
+         Ki=zeros(4,2,time+1,n_sen); gamma=0.4;
          H_sta=blkdiag(H,H,H); A_til=kron(eye(n_sen),A_dis);
         d0=[norm(X_tar([1 2],1)-X_sen([1 2],1,1));norm(X_tar([1 2],1)-X_sen([1 2],1,2));norm(X_tar([1 2],1)-X_sen([1 2],1,3))];
 %initialization
