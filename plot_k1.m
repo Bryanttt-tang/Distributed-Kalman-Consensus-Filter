@@ -11,6 +11,7 @@ plot(t_vec,X_min(1,:),'--','Color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Position-x')
+xlim([0 50])
 legend('X-real','X-hat','X-hat +/-1 STD')
 
 subplot(2,2,2)
@@ -23,6 +24,7 @@ plot(t_vec,X_min(2,:),'--','Color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Position-y')
+xlim([0 50])
 legend('X-real','X-hat','X-hat +/-1 STD')
 
 subplot(2,2,3)
@@ -35,6 +37,7 @@ plot(t_vec,X_min(3,:),'--','Color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Velocity-x')
+xlim([0 50])
 legend('X-real','X-hat','X-hat +/-1 STD')
 
 subplot(2,2,4)
@@ -47,7 +50,8 @@ plot(t_vec,X_min(4,:),'--','Color','r');
 grid on
 xlabel('Time(s)') 
 ylabel('Velocity-y')
+xlim([0 50])
 legend('X-real','X-hat','X-hat +/-1 STD')
 
-sgtitle('estimation error using Kalman filter')
+sgtitle('Estimation of target dynamics using local Kalman filter')
 end

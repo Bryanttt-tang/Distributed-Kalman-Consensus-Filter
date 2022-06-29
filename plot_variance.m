@@ -18,6 +18,7 @@ for i =1:length(t_vec)
   M2x(i)=P_M(1,1,i,2);M2y(i)=P_M(2,2,i,2);M2vx(i)=P_M(3,3,i,2);M2vy(i)=P_M(4,4,i,2);
   M3x(i)=P_M(1,1,i,3);M3y(i)=P_M(2,2,i,3);M3vx(i)=P_M(3,3,i,3);M3vy(i)=P_M(4,4,i,3);
 end 
+figure(7)
 
 if k==1 % plot comparison of kalman filter
 subplot(2,2,1)
@@ -80,24 +81,24 @@ sgtitle('estimation error of different sensors-kalman filter')
 
 elseif k==0 % plot comparison of kalman consensus filter
 subplot(2,2,1)
-plot(t_vec,M1x)
+plot(t_vec,sqrt(M1x))
 hold on
-plot(t_vec,M2x)
+plot(t_vec,sqrt(M2x))
 hold on 
-plot(t_vec,M3x)
+plot(t_vec,sqrt(M3x))
 grid on
 xlabel('Time(s)') 
 ylabel('Variance-x')
-xlim([0 8])
+xlim([0 30])
 %ylim([-1.4 -0.5]);
 legend('P_M21','P_M31','P_M41')
 
 subplot(2,2,2)
-plot(t_vec,M1y)
+plot(t_vec,sqrt(M1y))
 hold on
-plot(t_vec,M2y)
+plot(t_vec,sqrt(M2y))
 hold on 
-plot(t_vec,M3y)
+plot(t_vec,sqrt(M3y))
 grid on
 xlabel('Time(s)') 
 ylabel('Variance-y')
@@ -119,11 +120,11 @@ xlim([0 8])
 legend('P_M21','P_M31','P_M41')
 
 subplot(2,2,4)
-plot(t_vec,M1vy)
+plot(t_vec,sqrt(M1vy))
 hold on
-plot(t_vec,M2vy)
+plot(t_vec,sqrt(M2vy))
 hold on 
-plot(t_vec,M3vy)
+plot(t_vec,sqrt(M3vy))
 grid on
 xlabel('Time(s)') 
 ylabel('Variance-vy')
@@ -136,58 +137,58 @@ sgtitle(str_1)
 
 else % plot comparison of DKCF
 subplot(2,2,1)
-plot(t_vec,M_1x)
+plot(t_vec,sqrt(M_1x))
 hold on
-plot(t_vec,M_2x)
+plot(t_vec,sqrt(M_2x))
 hold on 
-plot(t_vec,M_3x)
+plot(t_vec,sqrt(M_3x))
 grid on
 xlabel('Time(s)') 
-ylabel('Variance-x')
-xlim([0 8])
+ylabel('Standard Deviation-x')
+xlim([0 50])
 %ylim([-1.4 -0.5]);
-legend('P_M21','P_M31','P_M41')
+legend('\sigma_M21','\sigma_M31','\sigma_M41')
 
 subplot(2,2,2)
-plot(t_vec,M_1y)
+plot(t_vec,sqrt(M_1y))
 hold on
-plot(t_vec,M_2y)
+plot(t_vec,sqrt(M_2y))
 hold on 
-plot(t_vec,M_3y)
+plot(t_vec,sqrt(M_3y))
 grid on
 xlabel('Time(s)') 
-ylabel('Variance-y')
-xlim([0 8])
+ylabel('Standard Deviation-y')
+xlim([0 50])
 %ylim([-1.4 -0.5]);
-legend('P_M21','P_M31','P_M41')
+legend('\sigma_M21','\sigma_M31','\sigma_M41')
 
 subplot(2,2,3)
-plot(t_vec,M_1vx)
+plot(t_vec,sqrt(M_1vx))
 hold on
-plot(t_vec,M_2vx)
+plot(t_vec,sqrt(M_2vx))
 hold on 
-plot(t_vec,M_3vx)
+plot(t_vec,sqrt(M_3vx))
 grid on
 xlabel('Time(s)') 
-ylabel('Variance-vx')
-xlim([0 8])
+ylabel('Standard Deviation-V_x')
+xlim([0 50])
 %ylim([-1.4 -0.5]);
-legend('P_M21','P_M31','P_M41')
+legend('\sigma_M21','\sigma_M31','\sigma_M41')
 
 subplot(2,2,4)
-plot(t_vec,M_1vy)
+plot(t_vec,sqrt(M_1vy))
 hold on
-plot(t_vec,M_2vy)
+plot(t_vec,sqrt(M_2vy))
 hold on 
-plot(t_vec,M_3vy)
+plot(t_vec,sqrt(M_3vy))
 grid on
 xlabel('Time(s)') 
-ylabel('Variance-vy')
-xlim([0 8])
+ylabel('Standard Deviation-V_y')
+xlim([0 50])
 %ylim([-1.4 -0.5]);
-legend('P_M21','P_M31','P_M41')
-str_2 = sprintf('comparison of different sensors using DKCF, gamma = %d', gamma);
-sgtitle(str_2)
+legend('\sigma_M21','\sigma_M31','\sigma_M41')
+%str_2 = sprintf('Comparison of different sensors using DKCF, gamma = ',num2str(gamma));
+sgtitle(['Comparison of different sensors using DKCF, gamma = ',num2str(gamma)])
 
 end
 end

@@ -1,4 +1,6 @@
-Cx=1; Cy=1; dt=0.1; T=30; time=T/dt; m=1.2; n=4; n_sen=3; % m is mass, n is the number of UAVs
+close all;
+set(0,'defaultfigurecolor','w');
+Cx=1; Cy=1; dt=0.1; T=50; time=T/dt; m=1.2; n=4; n_sen=3; % m is mass, n is the number of UAVs
 t_vec=0:dt:T;
 x_ref1=[-1;1;0;0]; x_ref2=[-1;-1;0;0]; x_ref3=[1;1;0;0];x_ref4=[1;-1;0;0]; %referenece position and velocity in cartisian coordinate[x;y]
 %X1=zeros(4,time+1);X2=zeros(4,time+1);X3=zeros(4,time+1);
@@ -35,12 +37,6 @@ plot(X4(1,:),X4(2,:),'-.');
 title('Real Dynamics')
 legend('X1','X2','X3','X4')
 hold off
-%%
-%   d0=norm(X1([1 2],1)-x_ref2([1 2]));
-%          Rtr=(d0*R)^2;
-%          %dydx=(X_tar(2,1)-X_sen(2))/(X_tar(1,1)-X_sen(1)); %dy/dx
-%          theta=atan2(X1(2,1)-x_ref2(2),X1(1,1)-x_ref2(1));
-%          Rxy = Rrt2Rxy(Rtr, theta);
 
 %% Kalman filtering with GPS measurement
 H=[1 0 0 0; 0 1 0 0]; % Zi=H*xi+w, we measure the x,y position
@@ -66,6 +62,7 @@ plot_k1(t_vec,X1,X_hat21,X_plus21,X_min21);
 %% estimation of X1 using consensus filter
 X_sen_1= cat(3,X2,X3,X4);
 [X_hat_1,P_M_1,X_bar_1,P_P_1,X_plus_1,X_min_1] = kalman_consensus(R,Q,H,x01,P01,time,A_dis,X1,X_sen_1,n_sen);
+
 plot_kal_con(t_vec,X1,X_hat_1,X_plus_1,X_min_1,n_sen);
 % k=0;% k=1 means plot kalman; while k=0 means plot kalman consensus; whereas k=2 means DKCF
 % plot_diff_sensor(t_vec,X1,X_hat21,X_hat31,X_hat41,X_hat_1,k,3,0.4);
