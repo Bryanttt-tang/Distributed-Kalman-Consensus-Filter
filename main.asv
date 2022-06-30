@@ -29,24 +29,18 @@ figure(1)
 plot(X1(1,:),X1(2,:));
 grid on
 hold on
-plot(X1(1,1),X1(2,1),'b*')
+plot(X1(1,:),y,'o','MarkerSize',10)
 hold on
 plot(X2(1,:),X2(2,:),'--');
 hold on
-plot(X2(1,1),X2(2,1),'y*')
-hold on
 plot(X3(1,:),X3(2,:),':');
 hold on
-plot(X3(1,1),X3(2,1),'g*')
-hold on
 plot(X4(1,:),X4(2,:),'-.');
-hold on
-plot(X4(1,1),X4(2,1),'r*')
 title('Real Dynamics')
 xlabel('Position-x') 
 ylabel('Position-y')
-%xlim([-3 3])
-legend('X1','X1_0','X2','X2_0','X3','X3_0','X4','X4_0')
+xlim([-3 3])
+legend('X1','X2','X3','X4')
 hold off
 
 %% Kalman filtering with GPS measurement
