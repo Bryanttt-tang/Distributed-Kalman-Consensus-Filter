@@ -59,5 +59,5 @@ ylabel('Velocity-y')
 xlim([0 50])
 legend('X-real','X-hat','X-hat +/-1 STD')
 
-sgtitle('Estimation using the proposed DKCF')
+%sgtitle('Estimation using the proposed DKCF','FontSize', 16)
 end

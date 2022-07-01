@@ -55,5 +55,5 @@ ylabel('Velocity-y')
 xlim([0 50])
 legend('X-real','X-hat','X-hat +/-1 STD')
 
-sgtitle('Estimation using suboptimal KCF')
+%sgtitle('Estimation using suboptimal KCF','FontSize', 16)
 end

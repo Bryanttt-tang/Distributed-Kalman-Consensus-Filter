@@ -53,5 +53,5 @@ ylabel('Velocity-y')
 xlim([0 50])
 legend('X-real','X-hat','X-hat +/-1 STD')
 
-sgtitle('Estimation of target dynamics using local Kalman filter')
+%sgtitle('Estimation of target dynamics using local Kalman filter','FontSize', 16)
 end

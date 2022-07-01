@@ -137,7 +137,7 @@ grid on
 xlabel('Time(s)') 
 ylabel('Position-x')
 xlim([0 30])
-%ylim([-1.4 -0.5]);
+ylim([-1.4 -0.5]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,2)
@@ -152,7 +152,7 @@ grid on
 xlabel('Time(s)') 
 ylabel('Position-y')
 xlim([0 30])
-%ylim([0.7 1.7]);
+ylim([0.7 1.7]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,3)
@@ -167,7 +167,7 @@ grid on
 xlabel('Time(s)') 
 ylabel('Velocity-x')
 xlim([0 30])
-%ylim([-0.45 0.45]);
+ylim([-0.45 0.45]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,4)
@@ -182,10 +182,10 @@ grid on
 xlabel('Time(s)') 
 ylabel('Velocity-y')
 xlim([0 30])
-%ylim([-0.45 0.45]);
+ylim([-0.45 0.45]);
 legend('X-hat21','X-hat31','X-hat41')
 
 %str_2 = sprintf('Comparison of different sensors using DKCF, gamma = ',num2str(gamma));
-sgtitle(['Comparison of different sensors using DKCF, gamma = ',num2str(gamma),'  --(bad consensus parameter / unstable estimator)'])
+%sgtitle(['Comparison of different sensors using DKCF, gamma = ',num2str(gamma),'  --(no consensus)'],'FontSize', 16)
 end
 end

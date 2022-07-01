@@ -42,7 +42,7 @@ hold on
 plot(X4(1,:),X4(2,:),'-.');
 hold on
 plot(X4(1,1),X4(2,1),'r*')
-title('Real Dynamics')
+%title('Real Dynamics')
 xlabel('Position-x') 
 ylabel('Position-y')
 %xlim([-3 3])
@@ -80,7 +80,7 @@ plot_kal_con(t_vec,X1,X_hat_1,X_plus_1,X_min_1,n_sen);
 %% estimation of X1 using DKCF
 Bd_til=cat(1,Bd,Bd,Bd);
 Q_til = Bd_til*[vu 0;0 vu]*Bd_til';
-gamma=0.25;
+gamma=0;
 [X_hat_sta,P_M_sta,X_bar,P_P_sta,X_plus_sta,X_min_sta] = DKCF(R,Q_til,H,x01,P01,time,A_dis,X1,X_sen_1,n_sen,gamma);
 k=2;% k=1 means plot kalman; while k=0 means plot kalman consensus; whereas k=2 means DKCF
 %plot_diff_sensor(t_vec,X1,X_hat21,X_hat31,X_hat41,X_hat_sta,k,3,gamma);

@@ -188,7 +188,7 @@ xlim([0 50])
 %ylim([-1.4 -0.5]);
 legend('\sigma_M21','\sigma_M31','\sigma_M41')
 %str_2 = sprintf('Comparison of different sensors using DKCF, gamma = ',num2str(gamma));
-sgtitle(['Comparison of different sensors using DKCF, gamma = ',num2str(gamma)])
+%sgtitle(['Comparison of different sensors using DKCF, gamma = ',num2str(gamma)],'FontSize', 16)
 
 end
 end
