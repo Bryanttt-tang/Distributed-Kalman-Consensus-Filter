@@ -73,7 +73,7 @@ grid on
 xlabel('Time(s)') 
 ylabel('Position-x')
 xlim([0 50])
-ylim([-1.4 -0.5]);
+%ylim([-1.4 -0.5]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,2)
@@ -88,7 +88,7 @@ grid on
 xlabel('Time(s)') 
 ylabel('Position-y')
 xlim([0 50])
-ylim([0.7 1.7]);
+%ylim([0.7 1.7]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,3)
@@ -103,7 +103,7 @@ grid on
 xlabel('Time(s)') 
 ylabel('Velocity-x')
 xlim([0 50])
-ylim([-0.45 0.45]);
+%ylim([-0.45 0.45]);
 legend('X-hat21','X-hat31','X-hat41')
 
 subplot(2,2,4)
@@ -118,10 +118,10 @@ grid on
 xlabel('Time(s)') 
 ylabel('Velocity-y')
 xlim([0 50])
-ylim([-0.45 0.45]);
+%ylim([-0.45 0.45]);
 legend('X-hat21','X-hat31','X-hat41')
-str_1 = sprintf('Estimation of different sensors using KCF, eps = %d', eps);
-sgtitle(str_1)
+% str_1 = sprintf('Estimation of different sensors using KCF, eps = %d', eps);
+% sgtitle(str_1)
 
 
 else % plot comparison of DKCF

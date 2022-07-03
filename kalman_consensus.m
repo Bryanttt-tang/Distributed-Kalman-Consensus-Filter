@@ -5,12 +5,12 @@
 function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = kalman_consensus(R,Q,H,x0,P0,time,A_dis,X_tar,X_sen,n_sen)
          Ki=zeros(4,2,time+1,n_sen); eps=3;
         
-        %d0=[norm(X_tar([1 2],1)-X_sen([1 2],1,1));norm(X_tar([1 2],1)-X_sen([1 2],1,2));norm(X_tar([1 2],1)-X_sen([1 2],1,3))];
+        d0=[norm(X_tar([1 2],1)-X_sen([1 2],1,1));norm(X_tar([1 2],1)-X_sen([1 2],1,2));norm(X_tar([1 2],1)-X_sen([1 2],1,3))];
 %initialization
  for n=1:n_sen
      P_M(:,:,1,n)=P0;
      % compute R(k) with respect to distance
-     Rtr(:,:,n)=(R)^2;
+     Rtr(:,:,n)=(d0(n)*R)^2;
      theta(n)=atan2(X_tar(2,1)-X_sen(2,1,n),X_tar(1,1)-X_sen(1,1,n));
      Rxy(:,:,n) = Rrt2Rxy_2(Rtr(:,:,n), theta(n));
       
@@ -28,8 +28,8 @@ function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = kalman_consensus(R,Q,H,x0,P0,time,
        P_P(:,:,i+1,n)=A_dis*P_M(:,:,i,n)*A_dis'+Q; % here Q already includes B & B'
      
     % post update
-    %d(n)=norm(X_tar([1 2],i+1)-X_sen([1 2],i+1,n)); % distance between target and sensor
-    Rtr(:,:,n)=(R)^2;
+    d(n)=norm(X_tar([1 2],i+1)-X_sen([1 2],i+1,n)); % distance between target and sensor
+    Rtr(:,:,n)=(d(n)*R)^2;
     theta(n)=atan2(X_tar(2,i+1)-X_sen(2,i+1,n),X_tar(1,i+1)-X_sen(1,i+1,n));
     Rxy(:,:,n) = Rrt2Rxy_2(Rtr(:,:,n), theta(n)); %real time covirance matrix of w
     Z(:,i+1,n)=X_tar([1 2],i+1)+[normrnd(0,Rxy(1,1,n));normrnd(0,Rxy(2,2,n))]; % measurement is modeled as X_tar+w
