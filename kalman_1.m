@@ -1,6 +1,6 @@
 %kalman filter for stationary sensors
-function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = kalman_1(R,Q,H,x0,P0,time,A_dis,X_tar,X_sen)
-         K=zeros(4,2,time+1);P_M(:,:,1)=P0;
+function [X_hat,P_M,X_bar,P_P,X_plus,X_min,Z] = kalman_1(R,Q,H,x0,P0,time,A_dis,X_tar,X_sen)         
+K=zeros(4,2,time+1);P_M(:,:,1)=P0;
          % d0=norm(X_tar([1 2],1)-X_sen([1 2],1));
          Rtr=(R)^2;
          %dydx=(X_tar(2,1)-X_sen(2))/(X_tar(1,1)-X_sen(1)); %dy/dx

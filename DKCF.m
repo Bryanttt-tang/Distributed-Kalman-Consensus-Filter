@@ -3,9 +3,12 @@
 % we output X_hat as a tensor, which contains estimate from all the sensors
 %X_tar is still 1d, X_sen is n_sen dimensional
 
-function [X_hat,P_M_sta,X_bar,P_P_sta,X_plus,X_min] = DKCF(R,Q_til,H,x0,P0,time,A_dis,X_tar,X_sen,n_sen,gamma)
+function [X_hat,P_M_sta,X_bar,P_P_sta,X_plus,X_min] = DKCF(R,Q_til,H,x0,P0,time,A_dis,B_dis,u_vec,X_tar,X_sen,n_sen,gamma)
          Ki=zeros(4,2,time+1,n_sen);
-         H_sta=blkdiag(H,H,H); A_til=kron(eye(n_sen),A_dis);
+         H_sta=blkdiag(H,H,H); 
+         A_til=kron(eye(n_sen),A_dis);
+         B_til=kron(eye(n_sen),B_dis);
+         u_vec=repmat(u_vec,n_sen,1);
         d0=[norm(X_tar([1 2],1)-X_sen([1 2],1,1));norm(X_tar([1 2],1)-X_sen([1 2],1,2));norm(X_tar([1 2],1)-X_sen([1 2],1,3))];
 %initialization
  for n=1:n_sen
@@ -25,7 +28,7 @@ function [X_hat,P_M_sta,X_bar,P_P_sta,X_plus,X_min] = DKCF(R,Q_til,H,x0,P0,time,
   for i=1:time
      
        % prior update
-       X_bar(:,i+1)=A_til*X_hat(:,i);
+       X_bar(:,i+1)=A_til*X_hat(:,i) + B_til*u_vec(:,i);
        %X_bar([4*n-3:4*n],i+1)=A_dis*X_hat([4*n-3:4*n],i); % X_bar, X_hat stacked column-wise
 %        sumX_bar=sum(X_bar,3);% sum of all sensor's X_bar 
        P_P_sta(:,:,i+1)=A_til*P_M_sta(:,:,i)*A_til'+Q_til;
