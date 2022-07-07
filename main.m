@@ -1,6 +1,6 @@
 close all;
 set(0,'defaultfigurecolor','w');
-Cx=1; Cy=1; dt=0.1; T=30; time=T/dt; m=1.2; n=4; n_sen=3; % m is mass, n is the number of UAVs
+Cx=1; Cy=1; dt=0.05; T=30; time=T/dt; m=1.2; n=4; n_sen=3; % m is mass, n is the number of UAVs
 t_vec=0:dt:T;
 x_ref1=[-1;1;0;0]; x_ref2=[-1;-1;0;0]; x_ref3=[1;1;0;0];x_ref4=[1;-1;0;0]; %referenece position and velocity in cartisian coordinate[x;y]
 %X1=zeros(4,time+1);X2=zeros(4,time+1);X3=zeros(4,time+1);
@@ -67,7 +67,7 @@ rng(1);
 [X_hat31,P_M31,X_bar31,P_P31,X_plus31,X_min31] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,X3);
 rng(2);
 [X_hat41,P_M41,X_bar41,P_P41,X_plus41,X_min41] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,X4);
-%plot_k1(t_vec,X1,X_hat21,X_plus21,X_min21);
+plot_k1(t_vec,X1,X_hat21,X_plus21,X_min21);
 %plot_diff_sensor(t_vec,X1,X_hat21,X_hat31,X_hat41);
 
 %% estimation of X1 using consensus filter
@@ -81,7 +81,7 @@ X_sen_1= cat(3,X2,X3,X4);
 %rng(s);
 Bd_til=cat(1,Bd,Bd,Bd);
 Q_til = Bd_til*[vu 0;0 vu]*Bd_til';
-gamma=0.25;
+gamma=0.15;
 [X_hat_sta,P_M_sta,X_bar,P_P_sta,X_plus_sta,X_min_sta] = DKCF(R,Q_til,H,x01,P01,time,A_dis,X1,X_sen_1,n_sen,gamma);
 k=2;% k=1 means plot kalman; while k=0 means plot kalman consensus; whereas k=2 means DKCF
 %plot_diff_sensor(t_vec,X1,X_hat21,X_hat31,X_hat41,X_hat_sta,k,3,gamma);
