@@ -69,6 +69,8 @@ rng(1);
 rng(2);
 [X_hat41,P_M41,X_bar41,P_P41,X_plus41,X_min41,Z41] = kalman_1(R,Q,H,x01,P01,time,A_dis,X1,X4);
 %plot_k1(t_vec,X1,X_hat21,X_plus21,X_min21);
+
+plot_k1(t_vec,X1,X_hat21,X_plus21,X_min21);
 %plot_diff_sensor(t_vec,X1,X_hat21,X_hat31,X_hat41);
 
 %% estimation of X1 using consensus filter
