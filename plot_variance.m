@@ -33,7 +33,8 @@ grid on
 xlabel('Time(s)') 
 ylabel('Position-x')
 ylim([-2 2]);
-legend('X-hat21','X-hat31','X-hat41')
+legend('$\hat{X}_{21}$','X-hat31','X-hat41', 'Interpreter', 'latex')
+{'$X_{real}$','$\hat{X}$','$\hat{X}$ +/-1 STD'}, 'Interpreter', 'latex'
 
 subplot(2,2,2)
 % plot(t_vec,X_real(2,:),'o');
@@ -87,8 +88,8 @@ plot(t_vec,sqrt(M2x))
 hold on 
 plot(t_vec,sqrt(M3x))
 grid on
-xlabel('Time(s)') 
-ylabel('Variance-x')
+xlabel('Time[s]') 
+ylabel('Variance')
 xlim([0 30])
 %ylim([-1.4 -0.5]);
 legend('P_M21','P_M31','P_M41')
@@ -143,11 +144,11 @@ plot(t_vec,sqrt(M_2x))
 hold on 
 plot(t_vec,sqrt(M_3x))
 grid on
-xlabel('Time(s)') 
-ylabel('Standard Deviation-x')
-xlim([0 50])
+xlabel('Time[s]') 
+ylabel('$\mathbf{x}$-Standard Deviation', 'Interpreter', 'latex')
+xlim([0 30])
 %ylim([-1.4 -0.5]);
-legend('\sigma_M21','\sigma_M31','\sigma_M41')
+legend('\sigma_M,1','\sigma_M,2','\sigma_M,3')
 
 subplot(2,2,2)
 plot(t_vec,sqrt(M_1y))
@@ -156,11 +157,11 @@ plot(t_vec,sqrt(M_2y))
 hold on 
 plot(t_vec,sqrt(M_3y))
 grid on
-xlabel('Time(s)') 
-ylabel('Standard Deviation-y')
-xlim([0 50])
+xlabel('Time[s]') 
+ylabel('$\mathbf{y}$-Standard Deviation', 'Interpreter', 'latex')
+xlim([0 30])
 %ylim([-1.4 -0.5]);
-legend('\sigma_M21','\sigma_M31','\sigma_M41')
+legend('\sigma_M,1','\sigma_M,2','\sigma_M,3')
 
 subplot(2,2,3)
 plot(t_vec,sqrt(M_1vx))
@@ -169,11 +170,11 @@ plot(t_vec,sqrt(M_2vx))
 hold on 
 plot(t_vec,sqrt(M_3vx))
 grid on
-xlabel('Time(s)') 
-ylabel('Standard Deviation-V_x')
-xlim([0 50])
+xlabel('Time[s]') 
+ylabel('$\dot{\mathbf{x}}$-Standard Deviation', 'Interpreter', 'latex')
+xlim([0 30])
 %ylim([-1.4 -0.5]);
-legend('\sigma_M21','\sigma_M31','\sigma_M41')
+legend('\sigma_M,1','\sigma_M,2','\sigma_M,3')
 
 subplot(2,2,4)
 plot(t_vec,sqrt(M_1vy))
@@ -182,11 +183,11 @@ plot(t_vec,sqrt(M_2vy))
 hold on 
 plot(t_vec,sqrt(M_3vy))
 grid on
-xlabel('Time(s)') 
-ylabel('Standard Deviation-V_y')
-xlim([0 50])
+xlabel('Time[s]') 
+ylabel('$\dot{\mathbf{y}}$-Standard Deviation', 'Interpreter', 'latex')
+xlim([0 30])
 %ylim([-1.4 -0.5]);
-legend('\sigma_M21','\sigma_M31','\sigma_M41')
+legend('\sigma_M,1','\sigma_M,2','\sigma_M,3')
 %str_2 = sprintf('Comparison of different sensors using DKCF, gamma = ',num2str(gamma));
 %sgtitle(['Comparison of different sensors using DKCF, gamma = ',num2str(gamma)],'FontSize', 16)
 

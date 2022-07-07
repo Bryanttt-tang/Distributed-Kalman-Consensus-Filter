@@ -11,7 +11,7 @@ function [X_hat,P_M_sta,X_bar,P_P_sta,X_plus,X_min] = DKCF(R,Q_til,H,x0,P0,time,
  for n=1:n_sen
      P_M_sta(:,:,1)=blkdiag(P0,P0,P0); 
      % compute R(k) with respect to distance
-     Rtr(:,:,n)=(R)^2;
+     Rtr(:,:,n)=(d0(n)*R)^2;
      theta(n)=atan2(X_tar(2,1)-X_sen(2,1,n),X_tar(1,1)-X_sen(1,1,n));
          Rxy(:,:,n) = Rrt2Rxy_2(Rtr(:,:,n), theta(n));
       
@@ -34,7 +34,7 @@ function [X_hat,P_M_sta,X_bar,P_P_sta,X_plus,X_min] = DKCF(R,Q_til,H,x0,P0,time,
     %calculate time-varying distance
     for n=1:n_sen % assume the target cannot sense its own state
       d(n)=norm(X_tar([1 2],i+1)-X_sen([1 2],i+1,n)); % distance between target and sensor
-      Rtr(:,:,n)=(R)^2;
+      Rtr(:,:,n)=(d(n)*R)^2;
       theta(n)=atan2(X_tar(2,i+1)-X_sen(2,i+1,n),X_tar(1,i+1)-X_sen(1,i+1,n));
       Rxy(:,:,n) = Rrt2Rxy_2(Rtr(:,:,n), theta(n)); %real time covirance matrix of w
       Z([2*n-1:2*n],i+1)=X_tar([1 2],i+1)+[normrnd(0,Rxy(1,1,n));normrnd(0,Rxy(2,2,n))]; % measurement is modeled as X_tar+w

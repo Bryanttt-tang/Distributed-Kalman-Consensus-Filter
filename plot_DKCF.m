@@ -15,10 +15,10 @@ plot(t_vec,X_plus_ave(1,:),'--','Color','r');
 hold on
 plot(t_vec,X_min_ave(1,:),'--','Color','r');
 grid on
-xlabel('Time(s)') 
-ylabel('Position-x')
-xlim([0 50])
-legend('X-real','X-hat','X-hat +/-1 STD')
+xlabel('Time[s]') 
+ylabel('$\mathbf{x}$-Position', 'Interpreter', 'latex')
+xlim([0 30])
+legend({'$x_{real}$','$\hat{x}$','$\hat{x}$ +/-1 STD'}, 'Interpreter', 'latex')
 
 subplot(2,2,2)
 plot(t_vec,X_real(2,:));
@@ -28,10 +28,10 @@ plot(t_vec,X_plus_ave(2,:),'--','Color','r');
 hold on
 plot(t_vec,X_min_ave(2,:),'--','Color','r');
 grid on
-xlabel('Time(s)') 
-ylabel('Position-y')
-xlim([0 50])
-legend('X-real','X-hat','X-hat +/-1 STD')
+xlabel('Time[s]') 
+ylabel('$\mathbf{y}$-Position', 'Interpreter', 'latex')
+xlim([0 30])
+legend({'$x_{real}$','$\hat{x}$','$\hat{x}$ +/-1 STD'}, 'Interpreter', 'latex')
 
 subplot(2,2,3)
 plot(t_vec,X_real(3,:));
@@ -41,10 +41,10 @@ plot(t_vec,X_plus_ave(3,:),'--','Color','r');
 hold on
 plot(t_vec,X_min_ave(3,:),'--','Color','r');
 grid on
-xlabel('Time(s)') 
-ylabel('Velocity-x')
-xlim([0 50])
-legend('X-real','X-hat','X-hat +/-1 STD')
+xlabel('Time[s]') 
+ylabel('$\mathbf{x}$-Velocity','Interpreter', 'latex')
+xlim([0 30])
+legend({'$x_{real}$','$\hat{x}$','$\hat{x}$ +/-1 STD'}, 'Interpreter', 'latex')
 
 subplot(2,2,4)
 plot(t_vec,X_real(4,:));
@@ -54,10 +54,10 @@ plot(t_vec,X_plus_ave(4,:),'--','Color','r');
 hold on
 plot(t_vec,X_min_ave(4,:),'--','Color','r');
 grid on
-xlabel('Time(s)') 
-ylabel('Velocity-y')
-xlim([0 50])
-legend('X-real','X-hat','X-hat +/-1 STD')
+xlabel('Time[s]') 
+ylabel('$\mathbf{y}$-Velocity','Interpreter', 'latex')
+xlim([0 30])
+legend({'$x_{real}$','$\hat{x}$','$\hat{x}$ +/-1 STD'}, 'Interpreter', 'latex')
 
 %sgtitle('Estimation using the proposed DKCF','FontSize', 16)
 end
