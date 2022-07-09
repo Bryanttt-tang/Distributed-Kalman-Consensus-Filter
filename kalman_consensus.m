@@ -2,12 +2,13 @@
 % the number of UAV is n_sen+1
 % we output X_hat as a tensor, which contains estimate from all the sensors
 % X_tar is still 1d, X_sen is n_sen dimensional
-function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = kalman_consensus(R,Q,H,x0,P0,time,A_dis,X_tar,X_sen,n_sen)
-         Ki=zeros(4,2,time+1,n_sen); eps=3;
+function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = kalman_consensus(R,Q,H,x0,P0,time,A_dis,B_dis,u_vec,X_tar,X_sen,n_sen,omg,amp)
+         Ki=zeros(4,2,time+1,n_sen); eps=1.5;
         
         d0=[norm(X_tar([1 2],1)-X_sen([1 2],1,1));norm(X_tar([1 2],1)-X_sen([1 2],1,2));norm(X_tar([1 2],1)-X_sen([1 2],1,3))];
 %initialization
  for n=1:n_sen
+
      P_M(:,:,1,n)=P0;
      % compute R(k) with respect to distance
      Rtr(:,:,n)=(d0(n)*R)^2;
@@ -21,9 +22,10 @@ function [X_hat,P_M,X_bar,P_P,X_plus,X_min] = kalman_consensus(R,Q,H,x0,P0,time,
  end        
  % update loop
   for i=1:time
+    
      for n=1:n_sen % assume the target cannot sense its own state
        % prior update
-       X_bar(:,i+1,n)=A_dis*X_hat(:,i,n);
+       X_bar(:,i+1,n)=A_dis*X_hat(:,i,n) + B_dis*u_vec(:,i);
        sumX_bar=sum(X_bar,3);% sum of all sensor's X_bar 
        P_P(:,:,i+1,n)=A_dis*P_M(:,:,i,n)*A_dis'+Q; % here Q already includes B & B'
      
