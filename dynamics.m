@@ -15,7 +15,12 @@ for i=1:time
     % if x_desired = x_ref, we let u=K*(x-x_ref)
     %so the dynamics becomes x_k+1=A*x_k + B*k*(x_k-x_ref) + v
     u_sin = amp*[sin(i/omg);cos(i/omg)];
+<<<<<<< HEAD
     u_vec(:,i) = L*(X_real(:,i)-x_ref) + u_sin;
     X_real(:,i+1)= A_dis*X_real(:,i) + B_dis*(u_vec(:,i)+ mvnrnd([0 0],Vu,1)');
+=======
+    u_vec(:,i) = L*(X_real(:,i)-x_ref)  + mvnrnd([0 0],Vu,1)' + u_sin;
+    X_real(:,i+1)= A_dis*X_real(:,i) + B_dis*u_vec(:,i);
+>>>>>>> 53ae29eda74d2817b0963c46f455d83441d6e821
 end
 end
